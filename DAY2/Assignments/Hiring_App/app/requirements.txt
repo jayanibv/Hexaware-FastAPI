@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+SQLAlchemy>=2.0
+psycopg2-binary
+pydantic
+python-dotenv
+alembic
+httpx
+pytest-asyncio
+pytest
