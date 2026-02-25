@@ -1,0 +1,28 @@
+Version 1.0
+basic api to check if sys is running
+simple endpoint to return student details
+
+Version 2.0
+path parameter and query parameters
+request body with pydantic models
+
+(what is path parameter?: a variable in the URL
+what is query parameter?: a key-value pair attached to the end of a URL)
+
+buisness requirements:
+get student by ID
+filter students by course
+register a new student
+
+student_api/
+|
+|--app/
+|   |--main.py
+|   |
+|   |--models/
+|   |   |--student.py
+|   |
+|   |--routes/
+|       |--student_routes.py
+|  
+|--requirements.txt

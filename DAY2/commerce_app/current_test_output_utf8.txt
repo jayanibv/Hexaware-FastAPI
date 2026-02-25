@@ -1,0 +1,203 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.0.2, pluggy-1.6.0 -- E:\HEXAWARE_FASTAPI\DAY2\commerce_app\app\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: E:\HEXAWARE_FASTAPI\DAY2\commerce_app
+plugins: anyio-4.12.1, asyncio-1.3.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 8 items
+
+tests/test_category.py::test_create_category PASSED                      [ 12%]
+tests/test_category.py::test_list_categories PASSED                      [ 25%]
+tests/test_customer.py::test_create_customer PASSED                      [ 37%]
+tests/test_migration.py::test_alembic_upgrade FAILED                     [ 50%]
+tests/test_migration.py::test_alembic_downgrade FAILED                   [ 62%]
+tests/test_order.py::test_create_order PASSED                            [ 75%]
+tests/test_product.py::test_create_product PASSED                        [ 87%]
+tests/test_product.py::test_product_validation FAILED                    [100%]
+
+================================== FAILURES ===================================
+____________________________ test_alembic_upgrade _____________________________
+
+    def test_alembic_upgrade():
+        config = get_alembic_config()
+>       command.upgrade(config, "head")
+
+tests\test_migration.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app\venv\Lib\site-packages\alembic\command.py:463: in upgrade
+    script = ScriptDirectory.from_config(config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app\venv\Lib\site-packages\alembic\script\base.py:186: in from_config
+    return ScriptDirectory(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <alembic.script.base.ScriptDirectory object at 0x0000020A4B9F5010>
+dir = WindowsPath('E:/HEXAWARE_FASTAPI/DAY2/commerce_app/alembic')
+file_template = '%(rev)s_%(slug)s', truncate_slug_length = None
+version_locations = None, sourceless = False, output_encoding = 'utf-8'
+timezone = None, hooks = [], recursive_version_locations = False
+messaging_opts = immutabledict({'quiet': False})
+
+    def __init__(
+        self,
+        dir: Union[str, os.PathLike[str]],  # noqa: A002
+        file_template: str = _default_file_template,
+        truncate_slug_length: Optional[int] = 40,
+        version_locations: Optional[
+            Sequence[Union[str, os.PathLike[str]]]
+        ] = None,
+        sourceless: bool = False,
+        output_encoding: str = "utf-8",
+        timezone: Optional[str] = None,
+        hooks: list[PostWriteHookConfig] = [],
+        recursive_version_locations: bool = False,
+        messaging_opts: MessagingOptions = cast(
+            "MessagingOptions", util.EMPTY_DICT
+        ),
+    ) -> None:
+        self.dir = _preserving_path_as_str(dir)
+        self.version_locations = [
+            _preserving_path_as_str(p) for p in version_locations or ()
+        ]
+        self.file_template = file_template
+        self.truncate_slug_length = truncate_slug_length or 40
+        self.sourceless = sourceless
+        self.output_encoding = output_encoding
+        self.revision_map = revision.RevisionMap(self._load_revisions)
+        self.timezone = timezone
+        self.hooks = hooks
+        self.recursive_version_locations = recursive_version_locations
+        self.messaging_opts = messaging_opts
+    
+        if not os.access(dir, os.F_OK):
+>           raise util.CommandError(
+                f"Path doesn't exist: {dir}.  Please use "
+                "the 'init' command to create a new "
+                "scripts folder."
+            )
+E           alembic.util.exc.CommandError: Path doesn't exist: E:\HEXAWARE_FASTAPI\DAY2\commerce_app\alembic.  Please use the 'init' command to create a new scripts folder.
+
+app\venv\Lib\site-packages\alembic\script\base.py:105: CommandError
+___________________________ test_alembic_downgrade ____________________________
+
+    def test_alembic_downgrade():
+        config = get_alembic_config()
+>       command.downgrade(config, "base")
+
+tests\test_migration.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app\venv\Lib\site-packages\alembic\command.py:507: in downgrade
+    script = ScriptDirectory.from_config(config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app\venv\Lib\site-packages\alembic\script\base.py:186: in from_config
+    return ScriptDirectory(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <alembic.script.base.ScriptDirectory object at 0x0000020A4BA51590>
+dir = WindowsPath('E:/HEXAWARE_FASTAPI/DAY2/commerce_app/alembic')
+file_template = '%(rev)s_%(slug)s', truncate_slug_length = None
+version_locations = None, sourceless = False, output_encoding = 'utf-8'
+timezone = None, hooks = [], recursive_version_locations = False
+messaging_opts = immutabledict({'quiet': False})
+
+    def __init__(
+        self,
+        dir: Union[str, os.PathLike[str]],  # noqa: A002
+        file_template: str = _default_file_template,
+        truncate_slug_length: Optional[int] = 40,
+        version_locations: Optional[
+            Sequence[Union[str, os.PathLike[str]]]
+        ] = None,
+        sourceless: bool = False,
+        output_encoding: str = "utf-8",
+        timezone: Optional[str] = None,
+        hooks: list[PostWriteHookConfig] = [],
+        recursive_version_locations: bool = False,
+        messaging_opts: MessagingOptions = cast(
+            "MessagingOptions", util.EMPTY_DICT
+        ),
+    ) -> None:
+        self.dir = _preserving_path_as_str(dir)
+        self.version_locations = [
+            _preserving_path_as_str(p) for p in version_locations or ()
+        ]
+        self.file_template = file_template
+        self.truncate_slug_length = truncate_slug_length or 40
+        self.sourceless = sourceless
+        self.output_encoding = output_encoding
+        self.revision_map = revision.RevisionMap(self._load_revisions)
+        self.timezone = timezone
+        self.hooks = hooks
+        self.recursive_version_locations = recursive_version_locations
+        self.messaging_opts = messaging_opts
+    
+        if not os.access(dir, os.F_OK):
+>           raise util.CommandError(
+                f"Path doesn't exist: {dir}.  Please use "
+                "the 'init' command to create a new "
+                "scripts folder."
+            )
+E           alembic.util.exc.CommandError: Path doesn't exist: E:\HEXAWARE_FASTAPI\DAY2\commerce_app\alembic.  Please use the 'init' command to create a new scripts folder.
+
+app\venv\Lib\site-packages\alembic\script\base.py:105: CommandError
+___________________________ test_product_validation ___________________________
+
+client = <starlette.testclient.TestClient object at 0x0000020A4BA468D0>
+
+    def test_product_validation(client):
+        response = client.post("/products/", json={
+            "name": "Invalid Product",
+            "description": "This product has invalid price and stock",
+            "price": -10,
+            "stock": 5,
+            "category_id": 1
+            })
+        assert response.status_code == 422
+        data = response.json()
+>       assert data["detail"] == "Input should be greater than 0"
+E       AssertionError: assert [{'ctx': {'gt': 0.0}, 'input': -10, 'loc': ['body', 'price'], 'msg': 'Input should be greater than 0', ...}] == 'Input should be greater than 0'
+
+tests\test_product.py:26: AssertionError
+============================== warnings summary ===============================
+app\schemas\product_schema.py:23
+  E:\HEXAWARE_FASTAPI\DAY2\commerce_app\app\schemas\product_schema.py:23: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class ProductResponse(ProductBase):
+
+app\schemas\category_schema.py:10
+  E:\HEXAWARE_FASTAPI\DAY2\commerce_app\app\schemas\category_schema.py:10: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class CategoryResponse(CategoryBase):
+
+app\schemas\customer_schema.py:11
+  E:\HEXAWARE_FASTAPI\DAY2\commerce_app\app\schemas\customer_schema.py:11: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class CustomerResponse(CustomerBase):
+
+app\schemas\order_schema.py:10
+  E:\HEXAWARE_FASTAPI\DAY2\commerce_app\app\schemas\order_schema.py:10: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class OrderResponse(OrderBase):
+
+tests/test_category.py::test_create_category
+tests/test_order.py::test_create_order
+tests/test_product.py::test_create_product
+  E:\HEXAWARE_FASTAPI\DAY2\commerce_app\app\controllers\category_controller.py:14: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return service.create_category(category_data.dict())
+
+tests/test_customer.py::test_create_customer
+tests/test_order.py::test_create_order
+  E:\HEXAWARE_FASTAPI\DAY2\commerce_app\app\controllers\customer_controller.py:14: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return service.create_customer(customer_data.dict())
+
+tests/test_order.py::test_create_order
+tests/test_product.py::test_create_product
+  E:\HEXAWARE_FASTAPI\DAY2\commerce_app\app\controllers\product_controller.py:15: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return service.create_product(product_data.dict())
+
+tests/test_order.py::test_create_order
+  E:\HEXAWARE_FASTAPI\DAY2\commerce_app\app\controllers\order_controller.py:14: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    return service.create_order(order_data.dict())
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_migration.py::test_alembic_upgrade - alembic.util.exc.Comma...
+FAILED tests/test_migration.py::test_alembic_downgrade - alembic.util.exc.Com...
+FAILED tests/test_product.py::test_product_validation - AssertionError: asser...
+================== 3 failed, 5 passed, 12 warnings in 0.32s ===================
