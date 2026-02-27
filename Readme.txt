@@ -68,3 +68,12 @@ Purpose of alembic
 2. To upgrade the database
 3. To downgrade the database
 4. Modify schema
+
+to build docker
+docker-compose up --build
+
+docker ps= will show the active containers
+
+docker images =will show build images
+
+docker-compose logs -f  =docker logs
